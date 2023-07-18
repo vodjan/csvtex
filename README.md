@@ -15,4 +15,6 @@ The script will decide what to do based on the file extension of the provided fi
 
 The output file will be named the same basename as the input with the other extension.
 
+For `.tex` -> `.csv` conversion, all text in the file not encased between `\begin{tabular}` and `\end{tabular}` will be ignored. If the file contains more than one `tabular`, only the first one will be converted.
+
 **WARNING**: The script currently does not check for existing files and will overwrite any file in the folder that may have the same filename.
