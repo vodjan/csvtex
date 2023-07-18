@@ -1,0 +1,3 @@
+*.tex
+*.csv
+__pycache__
