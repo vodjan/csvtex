@@ -43,6 +43,7 @@ def convert(filename):
     # TODO: only replace last file extension
 
     # write new file
+    # TODO: Optional stdout output?
     file = open(filename, 'w')
     for line in output:
         file.write("".join(line))
