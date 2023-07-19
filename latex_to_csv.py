@@ -93,10 +93,8 @@ def reformat_latex_elements_to_csv(input):
     return input
 
 
-
-def format_element(element):
-    pass
-
+# Convert TeX tabular into CSV and save into file
+# TODO: Optional stdout output?
 def convert(filename):
     output = reformat_latex_elements_to_csv(separate_latex_table_elements(remove_line_separators(table_only(read_tex(filename)))))
 
