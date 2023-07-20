@@ -24,6 +24,11 @@ def parse_args():
     parser.add_argument("-fdd", "--force-decimal-dots", action="store_true", dest="fdd",
                         help="force decimal dots on output")
 
+    # TODO: add options for:
+    # - custom output filename
+    # - optional stdout output
+    # - more optional formatting
+
     return parser.parse_args()
 
 
@@ -31,10 +36,12 @@ def parse_args():
 def init():
     global debug
     global filename
+    global out_filename
     global force_decimal_dots_on_output
 
     # Default values
     filename = None
+    out_filename = None  # csvtex.py expects None if no filename specified by options
     force_decimal_dots_on_output = False
 
     # Parse arguments

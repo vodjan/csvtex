@@ -52,24 +52,14 @@ def create_tabular(input):
     return input
 
 
-# Convert filename to basefilename.tex.
+# Return list of lines ('\n'-terminated strings)
 def convert(filename):
     output = create_tabular(
         format_elements_for_tex(
             read_csv(filename)))
 
-    # create new filename 
-    filename = filename.split('.')[0] + ".tex"
-    # TODO: check if filename exitst to avoid overwrites
-    # TODO: only replace last file extension
+    # terminate lines
+    for i in range(0, len(output)):
+        output[i] = output[i] + '\n'
 
-    # write .tex file
-    # TODO: Optional stdout output?
-    file = open(filename, 'w')
-    for line in output:
-        file.write("".join(line))
-        file.write("\n")
-    file.close()
-
-
-# TODO: Reformatting def, implement config.force_decimal_dots_on_output
+    return output

@@ -1,4 +1,5 @@
 import csv
+from io import StringIO  # used to return formatted CSV as array of strings (lines)
 
 import config
 
@@ -74,9 +75,10 @@ def separate_latex_table_elements(input):
 def reformat_latex_elements_to_csv(input):
     for i in range(0, len(input)):
         for j in range(0, len(input[i])):
-            # remove dollar signs
             # must use alloaction because of Python array shenanigans
-            input[i][j] = input[i][j].replace('$', '')
+            # remove dollar signs and curly brackets (sometimes used in Tex for decimal comma spacing)
+            # TODO: only remove curly brackets when used for decimal comma spacing
+            input[i][j] = input[i][j].replace('$', '').replace('{', '').replace('}', '')
             # remove leading and trailing spaces (also removes '\n')
             input[i][j] = input[i][j].strip()
             # remove double backslashes
@@ -93,8 +95,7 @@ def reformat_latex_elements_to_csv(input):
     return input
 
 
-# Convert TeX tabular into CSV and save into file
-# TODO: Optional stdout output?
+# Convert TeX tabular into CSV and return as array of '\n'-terminated lines (strings)
 def convert(filename):
     output = reformat_latex_elements_to_csv(
         separate_latex_table_elements(
@@ -102,12 +103,10 @@ def convert(filename):
                 table_only(
                     read_tex(filename)))))
 
-    # create new filename 
-    filename = filename.split('.')[0] + ".csv"
-    # TODO: check if filename exitst to avoid overwrites
-    # TODO: only replace last file extension
+    # add CSV formatting and return as array of lines (strings)
+    data = StringIO()
 
-    # save output as CSV
-    with open (filename, "w") as csvfile:
-        my_writer = csv.writer(csvfile)
-        my_writer.writerows(output)
+    my_writer = csv.writer(data)
+    my_writer.writerows(output)
+
+    return data.getvalue()
