@@ -1,5 +1,8 @@
 # For storing global variables
 
+import argparse
+
+# For things that don't change during runtime
 strings = {
     "ERR MSG: no file specified" : "Error: no file specified",
     "ERR CODE: no file specified" : 100,
@@ -7,7 +10,38 @@ strings = {
     "ERR CODE: unknown extension" : 101
 }
 
+
+# Parse arguments
+def parse_args():
+    # Parse arguments
+    parser = argparse.ArgumentParser(
+        prog = "csvtex",
+        description = "Convert CSV tables into TeX notation and back.",
+        epilog = "")
+    
+    parser.add_argument("filename", type=str,
+                        help="name of file to be converted")
+    parser.add_argument("-fdd", "--force-decimal-dots", action="store_true", dest="fdd",
+                        help="force decimal dots on output")
+
+    return parser.parse_args()
+
+
+# For things that change during runtime
 def init():
+    global debug
+    global filename
     global force_decimal_dots_on_output
 
+    # Default values
+    filename = None
     force_decimal_dots_on_output = False
+
+    # Parse arguments
+    args = parse_args()
+
+    # Assign arguments to global vars
+    filename = args.filename
+    force_decimal_dots_on_output = args.fdd
+
+
