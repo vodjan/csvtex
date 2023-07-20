@@ -17,7 +17,7 @@ if config.filename is None:
     exit(config.strings["ERR CODE: no file specified"])
 
 # Convert
-# Always expect convert functions to return array of lines (strings)
+# Always expect convert functions to return array of '\n'-terminated lines (strings)
 if config.filename.split('.')[-1] == "csv":
     output = csv_to_latex.convert(config.filename)
 
@@ -33,12 +33,17 @@ elif config.filename.split('.')[-1] == "tex":
         config.out_filename = config.filename.split(".")[0] + ".csv"
 else:
     # TODO: Better exception handling?
-    print(config.strings["ERR MSG: unknown extension"], sys.argv[-1].split('.')[-1])
+    print(config.strings["ERR MSG: unknown extension"], config.filename.split('.')[-1])
     exit(config.strings["ERR CODE: unknown extension"])
 
-# Save file
-# TODO: check if filename exitst to avoid overwrites
+# check if filename exitst to avoid overwrites
+if not config.force and os.path.isfile(config.out_filename):
+    print(config.strings["ERR MSG: file exists"], config.out_filename)
+    exit(config.strings["ERR CODE: file exists"])
+
 # TODO: optional stdout output
+
+# Save file
 file = open(config.out_filename, 'w')
 for line in output:
     file.write(line)

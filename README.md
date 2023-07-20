@@ -6,7 +6,7 @@ This is a sample project that I'm using to learn more about Git and GitHub and t
 
 # Usage
 ```
-csvtex.py [-h] [-fdd] <filename>
+csvtex.py [-h] [-f] [-fdd] [-o [OUTPUT]] filename
 ```
 ## Positional arguments:
 - `filename`: name of file to be converted
@@ -14,13 +14,12 @@ csvtex.py [-h] [-fdd] <filename>
 The program will decide what to do based on the file extension of the provided filename:
 - `.tex`: Convert from TeX `{tabular}` to CSV,
 - `.csv`: Convert from CSV into a basic TeX `{tabular}`.
-The output file will be named the same basename as the input with the other extension.
 
 ## Options:
 - `-h`, `--help`: show help message and exit
+- `-f`, `--force`: force operation (overwrite existing file)
 - `-fdd`, `--force-decimal-dots`: force decimal dots on output
+- `-o`, `--output`: specify output filename (default: same basename as input file with other extension)
 
 ## Notes:
 For `.tex` -> `.csv` conversion, all text in the file not encased between `\begin{tabular}` and `\end{tabular}` will be ignored. If the file contains more than one `tabular`, only the first one will be converted.
-
-**WARNING**: The script currently does not check for existing files and will overwrite any file in the folder that may have the same filename.
