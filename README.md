@@ -14,7 +14,6 @@ csvtex.py [-h] [-fdd] <filename>
 The program will decide what to do based on the file extension of the provided filename:
 - `.tex`: Convert from TeX `{tabular}` to CSV,
 - `.csv`: Convert from CSV into a basic TeX `{tabular}`.
-- 
 The output file will be named the same basename as the input with the other extension.
 
 ## Options:
