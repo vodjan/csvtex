@@ -37,14 +37,17 @@ else:
     exit(config.strings["ERR CODE: unknown extension"])
 
 # check if filename exitst to avoid overwrites
-if not config.force and os.path.isfile(config.out_filename):
+if not config.force and not config.print_to_stdout and os.path.isfile(config.out_filename):
     print(config.strings["ERR MSG: file exists"], config.out_filename)
     exit(config.strings["ERR CODE: file exists"])
 
-# TODO: optional stdout output
-
-# Save file
-file = open(config.out_filename, 'w')
-for line in output:
-    file.write(line)
-file.close()
+# print output
+if config.print_to_stdout:
+    for line in output:
+        print(line, end='')
+# save output to file
+else:
+    file = open(config.out_filename, 'w')
+    for line in output:
+        file.write(line)
+    file.close()

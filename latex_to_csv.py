@@ -110,3 +110,5 @@ def convert(filename):
     my_writer.writerows(output)
 
     return data.getvalue()
+
+# TODO: convert multiple tables into multiple CSV files

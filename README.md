@@ -20,6 +20,7 @@ The program will decide what to do based on the file extension of the provided f
 - `-f`, `--force`: force operation (overwrite existing file)
 - `-fdd`, `--force-decimal-dots`: force decimal dots on output
 - `-o`, `--output`: specify output filename (default: same basename as input file with other extension)
+- `-p`, `--print`: print output to stdout instead of writing to file
 
 ## Notes:
 For `.tex` -> `.csv` conversion, all text in the file not encased between `\begin{tabular}` and `\end{tabular}` will be ignored. If the file contains more than one `tabular`, only the first one will be converted.

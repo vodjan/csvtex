@@ -29,10 +29,10 @@ def parse_args():
                         help="force decimal dots on output")
     parser.add_argument("-o", "--output", type=str, nargs='?', dest="output",
                         help="specify output filename")
+    parser.add_argument("-p", "--print", action="store_true", dest="print_to_stdout",
+                        help="print output to stdout instead of writing to file")
 
     # TODO: add options for:
-    # - custom output filename
-    # - optional stdout output
     # - more optional formatting
 
     return parser.parse_args()
@@ -45,6 +45,7 @@ def init():
     global force  # overwrite existing file
     global out_filename  # the OUTPUT filename
     global force_decimal_dots_on_output
+    global print_to_stdout
 
     # Default values
     debug = False
@@ -52,6 +53,7 @@ def init():
     force = False
     out_filename = None  # csvtex.py expects None if no filename specified by options
     force_decimal_dots_on_output = False
+    print_to_stdout = False
 
     # Parse arguments
     args = parse_args()
@@ -61,3 +63,4 @@ def init():
     force = args.force
     if args.output is not None: out_filename = args.output
     force_decimal_dots_on_output = args.fdd
+    print_to_stdout = args.print_to_stdout
