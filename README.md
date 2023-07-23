@@ -19,7 +19,7 @@ The program will decide what to do based on the file extension of the provided f
 - `-h`, `--help`: show help message and exit
 - `-f`, `--force`: force operation (overwrite existing file)
 - `-fdd`, `--force-decimal-dots`: force decimal dots on output
-- `-o`, `--output`: specify output filename (default: same basename as input file with other extension)
+- `-o`, `--output`: specify output filename (default: same basename as input file with other extension; will be ignored if `-p` is specified)
 - `-p`, `--print`: print output to stdout instead of writing to file
 
 ## Notes:
